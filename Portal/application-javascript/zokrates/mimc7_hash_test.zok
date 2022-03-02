@@ -1,0 +1,4 @@
+import "./mimc7_hash" as hash
+
+def main(field digest, field[2] voterPub) -> bool:
+    return digest == hash([...voterPub])

@@ -1,0 +1,8 @@
+import "ecc/babyjubjubParams" as context
+from "ecc/babyjubjubParams" import BabyJubJubParams
+from "./proofOfValidEncryptedVote" import main as proofOfValidEncryptedVote
+
+def main(field[2] y, field[2] r, field[2] c, field[2] a1, field[2] a2, field[2] b1, field[2] b2, \
+        field d1, field d2, field r1, field r2) -> bool:
+    BabyJubJubParams context = context()
+    return proofOfValidEncryptedVote(y, r, c, a1, a2, b1, b2, d1, d2, r1, r2, context)

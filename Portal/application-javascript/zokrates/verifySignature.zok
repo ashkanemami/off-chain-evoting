@@ -1,0 +1,47 @@
+import "ecc/edwardsNegate" as neg
+import "ecc/edwardsAdd" as add
+import "ecc/edwardsScalarMult" as multiply
+import "utils/pack/bool/nonStrictUnpack256" as unpack256
+import "ecc/edwardsCompress" as edwardsCompress
+import "utils/casts/bool_256_to_u32_8" as bool_256_to_u32_8
+import "utils/casts/u32_to_field" as u32_to_field
+import "utils/casts/u32_8_to_bool_256" as to_bits
+from "ecc/babyjubjubParams" import BabyJubJubParams
+import "utils/pack/u32/pack256" as pack256
+
+import "./mimc7_hash" as hash
+
+/// Verifies a Schnorr signature is valid on BabyJubJub curve.
+///
+///    Checks if the following equations hold for the provided vote:
+///
+///    e =? H(s*G + e*Y, M)
+///
+///    where G is the chosen base point of the subgroup
+///    Y is the Public key, and M is the message
+///    and * denotes scalar multiplication in the subgroup
+///    also + denotes addition in the subgroup.
+///    H(.) denotes the hash function.
+///
+/// Arguments:
+///    s, e: Field elements. Commitment values.
+///    G, Y: Curve points. Generator point and the public key.
+///    context: Curve parameters (including generator G) used to create keypair.
+///
+/// Returns:
+///     Return true if signature is valid
+def main(field s, field e, field[2] Y, field M, BabyJubJubParams context) -> bool:
+
+    field[2] G = [context.Gu, context.Gv]
+
+    bool[256] sBits = unpack256(s)
+    bool[256] eBits = unpack256(e)
+
+    field[2] rv = add(multiply(sBits, G, context), multiply(eBits, Y, context), context)
+
+    field e_ = hash([...rv, M])
+
+    bool out = (e_ == e)
+
+    return out
+    //return e_

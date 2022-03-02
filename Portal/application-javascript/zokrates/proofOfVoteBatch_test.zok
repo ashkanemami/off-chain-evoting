@@ -1,0 +1,13 @@
+from "./proofOfVoteBatch" import main as proofOfVoteBatch
+
+def main(field prevRoot, field[2] prevR, field[2] prevC, \
+        field nextRoot, field[2] nextR, field[2] nextC, \
+        field[2] tollPub, private u32[10] voterID, \
+        private field[10][2] voterPub, private field[10][8] pathDigest, \
+        private field[10][2] r, private field[10][2] c, \
+		private field[10] s_v, private field[10] e_v, \
+		private field[10][2] a1, private field[10][2] a2, private field[10][2] b1, private field[10][2] b2, \
+        private field[10] d1, private field[10] d2, private field[10] r1, private field[10] r2) -> bool:
+
+    //return proofOfVoteBatch(prevRoot, prevR, prevC, nextRoot, nextR, nextC, tollPub, voterID, voterPub, pathDigest, r, c, s_v, e_v, a1, a2, b1, b2, d1, d2, r1, r2) == true
+    return proofOfVoteBatch(prevRoot, prevR, prevC, nextRoot, nextR, nextC, tollPub, voterID, voterPub, pathDigest, r, c, s_v, e_v, a1, a2, b1, b2, d1, d2, r1, r2)

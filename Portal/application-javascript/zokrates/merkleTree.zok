@@ -1,0 +1,15 @@
+import "./mimc7_hash" as hash
+import "utils/casts/field_to_u32" as field_to_u32
+
+def multiplex(bool selector, field left, field right) -> (field[2]):
+return if selector then [right, left] else [left, right] fi
+
+def calculateRoot<M>(field leafDigest, u32 voterId, field[M] PathDigest) -> (field):
+	field currentDigest = leafDigest
+	for u32 depth in 0..M do
+		u32 mask = field_to_u32(2**(depth))
+		bool selector = (voterId & mask) == mask
+		field[2] preimage = multiplex(selector, currentDigest, PathDigest[depth])
+		currentDigest = hash([...preimage])
+	endfor
+return currentDigest

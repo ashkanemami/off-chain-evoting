@@ -1,0 +1,55 @@
+import "ecc/edwardsNegate" as neg
+import "ecc/edwardsAdd" as add
+import "ecc/edwardsScalarMult" as multiply
+import "utils/pack/bool/nonStrictUnpack256" as unpack256
+from "ecc/babyjubjubParams" import BabyJubJubParams
+
+import "./mimc7_hash" as hash
+
+def pointEq(field[2] a, field[2] b) -> (bool):
+    return (a[0] == b[0]) && (a[1] == b[1])
+
+/// Verifies a given vote is either 1 or 0.
+///
+///    Checks if the following equations hold for the provided vote:
+///    d1 + d2 = hash(r, c, a1, b1, a2, b2)
+///    a1 = r1*G + d1*r
+///    a2 = r2*G + d2*r
+///    b1 = r1*y + d1*c
+///    b2 = r2*y + d2*c - G
+///    where G is the chosen base point of the subgroup
+///    and * denotes scalar multiplication in the subgroup
+///
+/// Arguments:
+///    d1, d2: Field elements. Commitment values.
+///    a1, a2, b1, b2: Curve points. Commitment values.
+///    r, c: Curve points. The vote.
+///    G, y: Curve points. Generator point and the public key for voting.
+///    context: Curve parameters (including generator G) used to create keypair.
+///
+/// Returns:
+///     Return true if vote value is either 1 or zero and the zero knowledge proof realy works
+def main(field[2] y, field[2] r, field[2] c, field[2] a1, field[2] a2, field[2] b1, field[2] b2, \
+        field d1, field d2, field r1, field r2, BabyJubJubParams context) -> bool:
+    field[2] G = [context.Gu, context.Gv]
+
+    field ch = hash([...r, ...c, ...a1, ...b1, ...a2, ...b2])
+    bool[256] d1Bits = unpack256(d1)
+    bool[256] d2Bits = unpack256(d2)
+    bool[256] r1Bits = unpack256(r1)
+    bool[256] r2Bits = unpack256(r2)
+    bool[256] chBits = unpack256(ch)
+
+    field[2] a1Exp = add(multiply(r1Bits, G, context), multiply(d1Bits, r, context), context)
+    field[2] a2Exp = add(multiply(r2Bits, G, context), multiply(d2Bits, r, context), context)
+    field[2] b1Exp = add(multiply(r1Bits, y, context), multiply(d1Bits, c, context), context)
+    field[2] b2Exp = add(multiply(r2Bits, y, context), multiply(d2Bits, add(c, neg(G), context), context), context)
+
+    bool out = true
+    out = out && (ch == d1 + d2)
+    out = out && pointEq(a1Exp, a1)
+    out = out && pointEq(a2Exp, a2)
+    out = out && pointEq(b1Exp, b1)
+    out = out && pointEq(b2Exp, b2)
+
+    return out

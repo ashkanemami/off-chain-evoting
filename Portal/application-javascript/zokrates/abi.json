@@ -1,0 +1,231 @@
+{
+  "inputs": [
+    {
+      "name": "prevRoot",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "prevR",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 2,
+        "type": "field"
+      }
+    },
+    {
+      "name": "prevC",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 2,
+        "type": "field"
+      }
+    },
+    {
+      "name": "nextRoot",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "nextR",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 2,
+        "type": "field"
+      }
+    },
+    {
+      "name": "nextC",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 2,
+        "type": "field"
+      }
+    },
+    {
+      "name": "tollPub",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 2,
+        "type": "field"
+      }
+    },
+    {
+      "name": "voterID",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "u32"
+      }
+    },
+    {
+      "name": "voterPub",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "pathDigest",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 8,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "r",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "c",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "s_v",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    },
+    {
+      "name": "e_v",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    },
+    {
+      "name": "a1",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "a2",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "b1",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "b2",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "array",
+        "components": {
+          "size": 2,
+          "type": "field"
+        }
+      }
+    },
+    {
+      "name": "d1",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    },
+    {
+      "name": "d2",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    },
+    {
+      "name": "r1",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    },
+    {
+      "name": "r2",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 10,
+        "type": "field"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "bool"
+    }
+  ]
+}

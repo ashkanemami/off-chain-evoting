@@ -1,0 +1,6 @@
+from "./merkleTree" import calculateRoot
+import "./mimc7_hash" as hash
+
+def main(field root, field[2] voterPub, u32 voterId, field[5] pathDigest) -> field:
+    //return root == calculateRoot(hash([...voterPub]), voterId, pathDigest)
+    return calculateRoot(hash([...voterPub]), voterId, pathDigest)

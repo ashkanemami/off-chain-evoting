@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+		<script type="text/javascript" src="/voter/bundle.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<title>Voter Panel</title>
+	<style>
+
+	      @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+	      body {
+	        background: #fff;
+	        color: #000;
+	        font-family: 'Josefin Sans', sans-serif;
+	        font-size: 100%;
+	        padding: 3em 0;
+	      }
+	</style>
+</head>
+<body class="container">
+	<div class="col-sm-7">
+		<h1><span style="color:rgb(0,0,255)">SCL</span> Online Voting Platform</h1>
+		<h2>Voter Panel</h2>
+		<div class="table-responsive">
+			<p class="alert alert-info" role="alert">Voting Status: <span id="contractStatus">Not clicked</span></p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Accounts:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="accounts"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">ChainId:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="chainId"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Network:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="network"></span></th>
+					</tr>
+				</thead>
+				<tbody id="candidate-rows" style="background-color:rgb(255,255,255)"></tbody>
+			</table>
+		</div>
+		<!-- Private Key -->
+		<h2>Please Enter your Private Key:</h2>
+	<input id="voterBjjPrivKeyVal" placeholder="Your BabyJubJub Private Key" style="width: 250px" type="password"><br>
+		<br>
+<button class="btn btn-primary" id="deployButton">Submit</button>
+<!-- Key Possition in Merkle -->
+<h2>Enter your Public Key position in Merkle Tree:</h2>
+<input id="voterPosition" placeholder="Your Public Key position in Merkle Tree" style="width: 250px" type="password"><br><br>
+<button class="btn btn-primary" disabled id="positionButton">Submit</button>
+<!-- Chosing Vote -->
+
+		<h2>Please Choose your Vote:</h2>
+		<input type = radio name = "voterVote" id = "yes"> <label class="radio-label">Yes</label> <br></br>
+		<input type = radio name = "voterVote" id = "no"> <label class="radio-label">No</label><br></br>
+		<button class="btn btn-primary" disabled id="createVote">Create Vote</button><br>
+		<!-- Sign vote -->
+		<br>
+		<h2>Sign Your vote:</h2>
+		<br>
+		<button class="btn btn-primary" disabled id="signVote">Sign your vote</button>
+		<!-- Cast Vote -->
+		<h2>Cast your Vote:</h2>
+		<br>
+		<button class="btn btn-primary" disabled id="castVote">Cast Vote</button>
+		<br>
+	</div>
+	<div class="col-sm-offset-1 col-sm-4">
+		<div class="row">
+			<br>
+		</div>
+	</div>
+</body>
+</html>
