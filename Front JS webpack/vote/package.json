@@ -1,0 +1,47 @@
+{
+  "name": "@scl-voting-platform/voter",
+  "version": "1.0.0",
+  "description": "voter panel of scl voting platform",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production",
+    "serve": "static-server . --port 9011"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetaMask/test-dapp.git"
+  },
+  "files": [
+    "dist/"
+  ],
+  "author": "Ashkan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/Ashkan96/evoting"
+  },
+  "homepage": "https://gitlab.com/Ashkan96/evoting",
+  "dependencies": {
+    "@metamask/onboarding": "^1.0.0",
+    "assert": "^2.0.0",
+    "circomlib": "^0.4.1",
+    "crypto": "^1.0.1",
+    "ethers": "^5.0.26",
+    "ffjavascript": "^0.2.33"
+  },
+  "devDependencies": {
+    "@metamask/eslint-config": "^2.0.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-json": "^2.0.1",
+    "eth-sig-util": "^2.5.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "static-server": "^2.2.1",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

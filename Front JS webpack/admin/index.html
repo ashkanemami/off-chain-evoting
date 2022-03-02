@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="./bundle.js">
+	</script>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<title>Admin Panel</title>
+	<style>
+
+	      @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+	      body {
+	        background: #fff;
+	        color: #000;
+	        font-family: 'Josefin Sans', sans-serif;
+	        font-size: 100%;
+	        padding: 3em 0;
+	      }
+	</style>
+</head>
+<body class="container">
+	<div class="col-sm-7">
+		<h1><span style="color:rgb(0,0,255)">SCL</span> Online Voting Platform</h1>
+		<h2>Admin Panel</h2>
+		<div class="table-responsive">
+			<p class="alert alert-info" role="alert">Contract Status: <span id="contractStatus">Not clicked</span></p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Accounts:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="accounts"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">ChainId:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="chainId"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Network:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="network"></span></th>
+					</tr>
+				</thead>
+				<tbody id="candidate-rows" style="background-color:rgb(255,255,255)"></tbody>
+			</table>
+		</div>
+		<h2>Connect to the Metamask:</h2><button class="btn btn-primary" disabled id="connectButton"></button>
+		<h2>Deploy voting smart contract:</h2><button class="btn btn-primary" disabled id="deployButton">Deploy Contract</button>
+		<h2>Add decryptors Public Key:</h2><input id="decryptorPubKeyVal" placeholder="Ethereum Public Key" style="width: 250px" type="text"><br>
+		<br>
+		<input id="decryptorBjjPubKeyVal" placeholder="BabyJubJub Public Key" style="width: 250px" type="text"><br>
+		<br>
+		<button class="btn btn-primary" disabled id="addDecryptor">Add Decryptor</button><br>
+		<br>
+		<h2>Add voters Public Key:</h2><input id="voterPubKeyVal" placeholder="Ethereum Public Key" style="width: 250px" type="text"><br>
+		<br>
+		<button class="btn btn-primary" disabled id="addVoter">Add Voter</button>
+		<h2>Press to end Registration time:</h2><button class="btn btn-primary" disabled id="endReg">End Registration</button><br>
+		<br>
+	</div>
+	<div class="col-sm-offset-1 col-sm-4">
+		<div class="row">
+			<br>
+			<br>
+			<br>
+			<h2>Press to end vote casting time:</h2><button class="btn btn-primary" disabled id="endVoteCast">End Vote casting</button>
+		</div>
+	</div>
+</body>
+</html>

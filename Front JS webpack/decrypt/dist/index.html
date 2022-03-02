@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="./bundle.js">
+	</script>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<title>Decryptor Panel</title>
+	<style>
+	   @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+	   body {
+	     background: #fff;
+	     color: #000;
+	     font-family: 'Josefin Sans', sans-serif;
+	     font-size: 100%;
+	     padding: 3em 0;
+	   }
+	</style>
+</head>
+<body class="container">
+	<div class="col-sm-8">
+		<h1><span style="color:rgb(0,0,255)">SCL</span> Online Voting Platform</h1>
+		<h2>Decryptor Panel</h2>
+		<div class="table-responsive">
+			<p class="alert alert-info" role="alert">Contract Status: <span id="contractStatus">Not clicked</span></p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Accounts:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="accounts"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">ChainId:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="chainId"></span></th>
+					</tr>
+					<tr>
+						<th style="background-color:rgb(255,255,255)">Network:</th>
+						<th style="background-color:rgb(255,255,255)"><span id="network"></span></th>
+					</tr>
+				</thead>
+				<tbody id="candidate-rows" style="background-color:rgb(255,255,255)"></tbody>
+			</table>
+		</div>
+		<h2>Connect to the Metamask:</h2><button class="btn btn-primary" disabled id="connectButton"></button>
+		<h2>Enter voting contract address:</h2><input id="contractAddr" placeholder="Contract address" style="width: 250px" type="text"><br>
+		<br>
+		<button class="btn btn-primary" disabled id="deployButton">Deploy Contract</button><br>
+		<br>
+		<br>
+		<br>
+		<input id="srtContainer" placeholder="Submit your secret" style="width: 250px" type="password"><br>
+		<br>
+		<button class="btn btn-primary" disabled id="decryptButton">Decrypt Button</button>
+	</div>
+</body>
+</html>
