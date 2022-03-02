@@ -1,0 +1,8 @@
+import "ecc/babyjubjubParams" as context
+from "ecc/babyjubjubParams" import BabyJubJubParams
+from "./verifySignature" import main as verifySignature
+
+def main(field s, field e, field[2] y, field m) -> bool:
+    BabyJubJubParams context = context()
+    return verifySignature(s, e, y, m, context) == true
+    //return verifySignature(s, e, y, m, context)

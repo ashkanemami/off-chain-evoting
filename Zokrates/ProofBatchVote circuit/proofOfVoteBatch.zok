@@ -1,0 +1,74 @@
+import "ecc/edwardsAdd" as add
+
+import "ecc/babyjubjubParams" as context
+from "ecc/babyjubjubParams" import BabyJubJubParams
+
+import "./mimc7_hash" as hash
+from "./verifySignature" import main as verifySignature
+from "./proofOfValidEncryptedVote" import main as proofOfValidEncryptedVote
+from "./merkleTree" import calculateRoot
+
+/*
+* N -> Total number of voters
+* M -> Depth of the Merkel tree
+*
+*/
+def main<N,M>(field prevRoot, field[2] prevR, field[2] prevC, \
+		field nextRoot, field[2] nextR, field[2] nextC, \
+		field[2] tollPub, private u32[N] voterId, \
+        private field[N][2] voterPub, private field[N][M] pathDigest, \
+        private field[N][2] r, private field[N][2] c, \
+		private field[N] s_v, private field[N] e_v, \
+		private field[N][2] a1, private field[N][2] a2, private field[N][2] b1, private field[N][2] b2, \
+        private field[N] d1, private field[N] d2, private field[N] r1, private field[N] r2) -> bool:
+	bool out = true
+
+	BabyJubJubParams context = context()
+
+	field updatedRoot = prevRoot
+	field[2] currentR = prevR
+	field[2] currentC = prevC
+	//field aa = 0
+	//bool bb = true
+
+	for u32 voter in 0..N do
+		// check if user have the rights to vote
+		// assert(updatedRoot == calculateRoot(hash([...voterPub[voter]]), voterId[voter], pathDigest[voter]))
+		out = out && (updatedRoot == calculateRoot(hash([...voterPub[voter]]), voterId[voter], pathDigest[voter]))
+		//aa = if voter == 5 then calculateRoot(hash([...voterPub[voter]]), voterId[voter], pathDigest[voter]) else aa fi
+
+		// check if voter's vote is valid
+		//assert(proofOfValidEncryptedVote(tollPub, r[voter], c[voter], a1[voter], a2[voter], b1[voter], b2[voter], \
+    //                                    d1[voter], d2[voter], r1[voter], r2[voter], context) == true)
+		out = out && (proofOfValidEncryptedVote(tollPub, r[voter], c[voter], a1[voter], a2[voter], b1[voter], b2[voter], \
+                                        d1[voter], d2[voter], r1[voter], r2[voter], context))
+		//bool bb = proofOfValidEncryptedVote(tollPub, r[voter], c[voter], a1[voter], a2[voter], b1[voter], b2[voter], \
+    //                                  d1[voter], d2[voter], r1[voter], r2[voter], context)
+		//bb = if voter == 3 then proofOfValidEncryptedVote(tollPub, r[voter], c[voter], a1[voter], a2[voter], b1[voter], b2[voter], \
+    //                                  d1[voter], d2[voter], r1[voter], r2[voter], context) else bb fi
+
+
+		// check voter's signature
+		// assert(verifySignature(s_v[voter], e_v[voter], voterPub[voter], hash([...r[voter], ...c[voter]]), context) == true)
+		out = out && (verifySignature(s_v[voter], e_v[voter], voterPub[voter], hash([...r[voter], ...c[voter]]), context))
+		bool cc = verifySignature(s_v[voter], e_v[voter], voterPub[voter], hash([...r[voter], ...c[voter]]), context)
+
+		// update the ballot box by adding the vote to it
+		currentR = add(currentR, r[voter], context)
+		currentC = add(currentC, c[voter], context)
+
+		// remove the user from the voters merkel tree
+		updatedRoot = calculateRoot(0, voterId[voter], pathDigest[voter])
+
+	endfor
+
+	//return updatedRoot
+	// assert(nextRoot == updatedRoot)
+	out = out && (nextRoot == updatedRoot)
+	// assert(nextR == currentR)
+	out = out && (nextR == currentR)
+	// assert(nextC == currentC)
+	out = out && (nextC == currentC)
+	return out
+	//return aa
+	//return bb

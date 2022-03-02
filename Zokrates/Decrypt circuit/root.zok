@@ -1,0 +1,32 @@
+import "ecc/edwardsAdd" as add
+import "ecc/edwardsScalarMult" as multiply
+import "utils/pack/bool/nonStrictUnpack256" as unpack256
+import "ecc/babyjubjubParams" as context
+from "ecc/babyjubjubParams" import BabyJubJubParams
+
+
+/// Arguments:
+///    sG: Curve point. Public key.
+///    s: Field element. Private key.
+///    context: Curve parameters (including generator G) used to create keypair.
+///    rG: totalVotesR. Sum of all randoms multiply generator G. (all X)
+///    rsG: each participant's sercret key multiply rG(totalVotesR)
+///
+/// Returns:
+///     Return true for pk/sk being a valid keypair alongside correct decryption, false otherwise.
+
+def main(field[2] sG, field[2] rG, field[2] rsG, private field s) -> (bool):
+    // load BabyJubJub context
+    BabyJubJubParams context = context()
+    field[2] G = [context.Gu, context.Gv]
+    bool[256] skBits = unpack256(s)
+
+    // prove ownership of sk alongside correct decryption
+    field[2] ptExp1 = multiply(skBits, G, context)
+    // correct decryption
+    field[2] ptExp2 = multiply(skBits, rG, context)
+
+    bool out =	if ptExp1[0] == sG[0] && ptExp1[1] == sG[1] then true else false fi
+    out =	if out && ptExp2[0] == rsG[0] && ptExp2[1] == rsG[1] then true else false fi
+
+    return out
